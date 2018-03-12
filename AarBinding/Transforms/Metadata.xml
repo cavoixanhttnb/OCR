@@ -1,0 +1,26 @@
+﻿<metadata>
+  <!--
+  This sample removes the class: android.support.v4.content.AsyncTaskLoader.LoadTask:
+  <remove-node path="/api/package[@name='android.support.v4.content']/class[@name='AsyncTaskLoader.LoadTask']" />
+  
+  This sample removes the method: android.support.v4.content.CursorLoader.loadInBackground:
+  <remove-node path="/api/package[@name='android.support.v4.content']/class[@name='CursorLoader']/method[@name='loadInBackground']" />
+  -->
+   <attr path="/api/package[@name='com.abbyy.mobile.rtr']/interface[@name='IDataCaptureService']/method[@name='getExtendedSettings']" 
+        name="managedReturn">Com.Abbyy.Mobile.Rtr.IRecognitionServiceExtendedSettings</attr>  
+  <attr path="/api/package[@name='com.abbyy.mobile.rtr']/class[@name='IDataCaptureServiceInvoker']/method[@name='getExtendedSettings']" 
+        name="managedReturn">Com.Abbyy.Mobile.Rtr.IRecognitionServiceExtendedSettings</attr>
+  
+   <attr path="/api/package[@name='com.abbyy.mobile.rtr']/interface[@name='ITextCaptureService']/method[@name='getExtendedSettings']" 
+        name="managedReturn">Com.Abbyy.Mobile.Rtr.IRecognitionServiceExtendedSettings</attr>
+  <attr path="/api/package[@name='com.abbyy.mobile.rtr']/class[@name='ITextCaptureServiceInvoker']/method[@name='getExtendedSettings']" 
+        name="managedReturn">Com.Abbyy.Mobile.Rtr.IRecognitionServiceExtendedSettings</attr>
+  
+  <attr path="/api/package[@name='com.abbyy.mobile.ocr4']/class[@name='RecognitionContextHolderImpl']" name="visibility">public</attr>
+
+  <!--<attr path="/api/package[@name='com.abbyy.mobile.ocr4']/class[@name='Engine']/method[@name='getRecognitionManager']"
+       name="managedReturn">Java.Lang.Object</attr>
+  <attr path="/api/package[@name='com.abbyy.mobile.ocr4']/class[@name='Engine']/method[@name='getRecognitionManager' and count(parameter)=1 and parameter[1][@type='T']]"  
+		name="type">Java.Lang.Object</attr>-->
+  
+</metadata>

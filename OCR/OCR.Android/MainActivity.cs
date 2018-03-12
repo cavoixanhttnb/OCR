@@ -116,6 +116,7 @@ namespace OCR.Droid
             warningTextView = (TextView)FindViewById(Resource.Id.warningText);
             errorTextView = (TextView)FindViewById(Resource.Id.errorText);
             startButton = (Button)FindViewById(Resource.Id.startButton);
+            startButton.Click += StartButton_Click;
 
             // Initialize the recognition language spinner
             initializeRecognitionLanguageSpinner();
@@ -140,6 +141,10 @@ namespace OCR.Droid
             }
 
             layout.Click += Layout_Click;
+        }
+        private void StartButton_Click(object sender, System.EventArgs e)
+        {
+            onStartButtonClick((View)sender);
         }
 
         private void Layout_Click(object sender, System.EventArgs e)
@@ -360,7 +365,7 @@ namespace OCR.Droid
             Task.Run(() =>
             {
                 textCaptureService.Stop();
-                Thread.Sleep(500);
+                Thread.Sleep(1000);
                 onPostExecute();
 
             });

@@ -56,6 +56,9 @@ namespace OCR.Droid
 			// aapt resource value: 0x7f060004
 			public const int startButton = 2131099652;
 			
+			// aapt resource value: 0x7f060005
+			public const int toolbar = 2131099653;
+			
 			// aapt resource value: 0x7f060002
 			public const int warningText = 2131099650;
 			
@@ -77,6 +80,9 @@ namespace OCR.Droid
 			
 			// aapt resource value: 0x7f030001
 			public const int Spinner = 2130903041;
+			
+			// aapt resource value: 0x7f030002
+			public const int Toolbar = 2130903042;
 			
 			static Layout()
 			{

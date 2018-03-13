@@ -17,7 +17,7 @@ using Android.Content.PM;
 
 namespace OCR.Droid
 {
-    [Activity(Label = "OCR", MainLauncher = true, Icon = "@mipmap/icon", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "OCR", MainLauncher = true, Icon = "@mipmap/icon", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation| ConfigChanges.KeyboardHidden)]
     public class MainActivity : Activity
     {
         //int count = 1;
@@ -95,13 +95,7 @@ namespace OCR.Droid
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
-            simpleCameraAutoFocusCallback = new CameraAutoFocusCallbackCus(this, CameraAutoFocusCallbackSimple);
-            startRecognitionCameraAutoFocusCallback = new CameraAutoFocusCallbackCus(this, CameraAutoFocusCallbackStart);
-            finishCameraInitialisationAutoFocusCallback = new CameraAutoFocusCallbackCus(this, CameraAutoFocusCallbackFinish);
-            textCaptureCallback = new TextCaptureServiceCallbackCus(this);
-            cameraPreviewCallback = new CameraPreviewCallbackCus(this);
-
+            
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
 
@@ -117,6 +111,12 @@ namespace OCR.Droid
             errorTextView = (TextView)FindViewById(Resource.Id.errorText);
             startButton = (Button)FindViewById(Resource.Id.startButton);
             startButton.Click += StartButton_Click;
+
+            simpleCameraAutoFocusCallback = new CameraAutoFocusCallbackCus(this, CameraAutoFocusCallbackSimple);
+            startRecognitionCameraAutoFocusCallback = new CameraAutoFocusCallbackCus(this, CameraAutoFocusCallbackStart);
+            finishCameraInitialisationAutoFocusCallback = new CameraAutoFocusCallbackCus(this, CameraAutoFocusCallbackFinish);
+            textCaptureCallback = new TextCaptureServiceCallbackCus(this);
+            cameraPreviewCallback = new CameraPreviewCallbackCus(this);
 
             // Initialize the recognition language spinner
             initializeRecognitionLanguageSpinner();
@@ -242,7 +242,7 @@ namespace OCR.Droid
                 parameters.MeteringAreas  =focusAreas;
             }
 
-            parameters.FocusMode=mode;
+            parameters.FocusMode = mode;
 
             // Commit the camera parameters
             camera.SetParameters(parameters);
@@ -342,8 +342,7 @@ namespace OCR.Droid
             // Do not switch off the screen while text capture service is running
             previewSurfaceHolder.SetKeepScreenOn(true);
             // Get area of interest (in coordinates of preview frames)
-            Rect areaOfInterest = new Rect();
-            surfaceViewWithOverlay.GetDrawingRect(areaOfInterest);
+            Rect areaOfInterest = new Rect(surfaceViewWithOverlay.getAreaOfInterest());
             // Clear error message
             errorTextView.Text = "";
             // Start the service
@@ -358,30 +357,12 @@ namespace OCR.Droid
         {
             // Disable the 'Stop' button
             startButton.Enabled = false;
-
             // Stop the service asynchronously to make application more responsive. Stopping can take some time
             // waiting for all processing threads to stop
 
-            Task.Run(() =>
-            {
-                textCaptureService.Stop();
-                Thread.Sleep(1000);
-                onPostExecute();
-
-            });
+            StopTask stop = new StopTask(this);
+            stop.Execute();
             
-        }
-
-        void onPostExecute()
-        {
-            if (previewSurfaceHolder != null)
-            {
-                // Restore normal power saving behaviour
-                previewSurfaceHolder.SetKeepScreenOn(false);
-            }
-            // Change the text on the stop button back to 'Start'
-            startButton.Text = BUTTON_TEXT_START;
-            startButton.Enabled = true;
         }
 
         // Clear recognition results
@@ -557,6 +538,12 @@ namespace OCR.Droid
             }
 
             languageSpinner.ItemSelected += LanguageSpinner_ItemSelected;
+            languageSpinner.NothingSelected += LanguageSpinner_NothingSelected;
+        }
+
+        private void LanguageSpinner_NothingSelected(object sender, AdapterView.NothingSelectedEventArgs e)
+        {
+            
         }
 
         private void LanguageSpinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
@@ -582,7 +569,7 @@ namespace OCR.Droid
         public void onStartButtonClick(View view)
         {
             if (startButton.Text.Equals(BUTTON_TEXT_STOP))
-            {
+            {   
                 stopRecognition();
             }
             else

@@ -43,27 +43,27 @@ namespace OCR.Droid
             if (BuildConfig.Debug)
             {
                 // Make the error easily visible to the developer
-                //string message = p0.Message;
-                //if (message == null)
-                //{
-                //    message = "Unspecified error while creating the service. See logcat for details.";
-                //}
-                //else
-                //{
-                //    if (message.Contains("ChineseJapanese.rom"))
-                //    {
-                //        message = "Chinese, Japanese and Korean are available in EXTENDED version only. Contact us for more information.";
-                //    }
-                //    if (message.Contains("Russian.edc"))
-                //    {
-                //        message = "Cyrillic script languages are available in EXTENDED version only. Contact us for more information.";
-                //    }
-                //    else if (message.Contains(".trdic"))
-                //    {
-                //        message = "Translation is available in EXTENDED version only. Contact us for more information.";
-                //    }
-                //}
-                //activity.errorTextView.Text = message;
+                string message = p0.Message;
+                if (message == null)
+                {
+                    message = "Unspecified error while creating the service. See logcat for details.";
+                }
+                else
+                {
+                    if (message.Contains("ChineseJapanese.rom"))
+                    {
+                        message = "Chinese, Japanese and Korean are available in EXTENDED version only. Contact us for more information.";
+                    }
+                    if (message.Contains("Russian.edc"))
+                    {
+                        message = "Cyrillic script languages are available in EXTENDED version only. Contact us for more information.";
+                    }
+                    else if (message.Contains(".trdic"))
+                    {
+                        message = "Translation is available in EXTENDED version only. Contact us for more information.";
+                    }
+                }
+                activity.errorTextView.Text = message;
             }
         }
 
@@ -110,6 +110,7 @@ namespace OCR.Droid
             // Delegate this task to the camera. When the buffer is filled we will receive
             // Camera.PreviewCallback.onPreviewFrame (see below)
             activity.camera.AddCallbackBuffer(buffer);
+            activity.textCaptureService.SubmitRequestedFrame(buffer);
         }
     }
 }

@@ -88,12 +88,36 @@
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StopTask.cs" />
     <Compile Include="SurfaceHolderCallbackCus.cs" />
     <Compile Include="SurfaceViewWithOverlay.cs" />
     <Compile Include="TextCaptureServiceCallbackCus.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\AbbyyRtrSdk.license" />
+    <AndroidAsset Include="Assets\patterns\European.rom" />
+    <AndroidAsset Include="Assets\patterns\FindText.rom" />
+    <AndroidAsset Include="Assets\dictionaries\Brazil.edc" />
+    <AndroidAsset Include="Assets\dictionaries\Czech.edc" />
+    <AndroidAsset Include="Assets\dictionaries\Danish.edc" />
+    <AndroidAsset Include="Assets\dictionaries\Dutch.edc" />
+    <AndroidAsset Include="Assets\dictionaries\English.edc" />
+    <AndroidAsset Include="Assets\dictionaries\Eston.edc" />
+    <AndroidAsset Include="Assets\dictionaries\Finnish.edc" />
+    <AndroidAsset Include="Assets\dictionaries\Flemmish.edc" />
+    <AndroidAsset Include="Assets\dictionaries\French.edc" />
+    <AndroidAsset Include="Assets\dictionaries\German.edc" />
+    <AndroidAsset Include="Assets\dictionaries\GermanNS.edc" />
+    <AndroidAsset Include="Assets\dictionaries\Greek.edc" />
+    <AndroidAsset Include="Assets\dictionaries\Indones.edc" />
+    <AndroidAsset Include="Assets\dictionaries\Italian.edc" />
+    <AndroidAsset Include="Assets\dictionaries\NorwBok.edc" />
+    <AndroidAsset Include="Assets\dictionaries\NorwNyn.edc" />
+    <AndroidAsset Include="Assets\dictionaries\Polish.edc" />
+    <AndroidAsset Include="Assets\dictionaries\Portug.edc" />
+    <AndroidAsset Include="Assets\dictionaries\Spanish.edc" />
+    <AndroidAsset Include="Assets\dictionaries\Swedish.edc" />
+    <AndroidAsset Include="Assets\dictionaries\Turkish.edc" />
     <None Include="packages.config" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Properties\AndroidManifest.xml" />
